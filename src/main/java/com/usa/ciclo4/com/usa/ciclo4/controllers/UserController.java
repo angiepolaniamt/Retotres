@@ -31,18 +31,30 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UserController {
     @Autowired
+    /**
+     * trae el servicio
+     */
     private UserService userService;
     
     @GetMapping("/all")
+    /**
+     * obtenerlos todos
+     */
     public List<User> getAll(){
         return userService.getAll();
     }
     @GetMapping("/{id}")
+    /**
+     * obtener un usuario desde la id
+     */
     public Optional <User> getUser(@PathVariable("id") int id) {
         return userService.getUser(id);
     }
     
     @PostMapping("/new")
+    /**
+     * Crear un usuario nuevo
+     */
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody User user){
         userService.save(user);
@@ -50,22 +62,34 @@ public class UserController {
     
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    /**
+     * actualizar los datos del usuario
+     */
     public User update(@RequestBody User user){
         return userService.update(user);
     }
     
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    /**
+     * Borrar el usuario desde su id
+     */
     public boolean delete(@PathVariable("id")int id){
         return userService.delete(id);
     }
     
      @GetMapping("/{email}/{password}")
+     /**
+      * comprobar el mail y la pw para autenticarlo
+      */
     public User authenticateUser(@PathVariable("email") String email, @PathVariable("password") String password){
         return userService.authenticatedUser(email,password);
     }
 
     @GetMapping("/emailexist/{email}")
+    /**
+     * Verificar si un usuario se habia registrado antes con ese mail
+     */
     public boolean emailExists (@PathVariable("email") String email){
         return userService.emailExists(email);
     }

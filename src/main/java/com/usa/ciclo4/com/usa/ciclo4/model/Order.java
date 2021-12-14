@@ -7,6 +7,7 @@ package com.usa.ciclo4.com.usa.ciclo4.model;
 import java.util.Date;
 import java.util.Map;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -20,6 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Order {
     public static String PENDING = "Pendiente";
     public static String APROVED = "Aprobada";

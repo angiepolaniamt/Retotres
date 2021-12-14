@@ -4,10 +4,15 @@
  */
 package com.usa.ciclo4.com.usa.ciclo4.service;
 
+import com.usa.ciclo4.com.usa.ciclo4.model.Gadget;
 import com.usa.ciclo4.com.usa.ciclo4.model.Order;
 import com.usa.ciclo4.com.usa.ciclo4.repository.OrderRepository;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +79,36 @@ public class OrderService {
     
     public List<Order> findZone(String zone){
         return orderRepository.findZone(zone);
+    }
+    /**
+     * Agregar una cantidad a la orden
+     * @param idOrder
+     * @param quantity
+     * @return 
+     */
+    public Order editQuantity(Integer idOrder, Integer quantity){
+        Optional<Order> exist = orderRepository.getOrder(idOrder);
+            Map<Integer, Integer> quantities = exist.get().getQuantities();
+            Integer var = 0;
+            Set<Integer> keys = quantities.keySet();
+            ArrayList<Integer> claves = new ArrayList<>();
+            for (Integer key : keys) {
+                claves.add(key);
+            }
+            Collections.sort(claves);
+            int mayorKey = 0;
+            
+            for (Integer clave : claves) {
+               
+                if (clave > mayorKey) {
+                    mayorKey = clave;
+                }
+            }
+            var = mayorKey+1;
+
+            quantities.put(var,quantity);
+            exist.get().setQuantities(quantities);
+            return orderRepository.create(exist.get());
+          
     }
 }

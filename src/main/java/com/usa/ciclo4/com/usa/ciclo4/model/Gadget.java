@@ -25,9 +25,9 @@ public class Gadget {
     private String category;
     private String name;
     private String description;
-    private double price;
-    private boolean availability = true;
-    private int quantity;
+    private Double price;
+    private Boolean availability = true;
+    private Integer quantity;
     private String photography;
 
 }
